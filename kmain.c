@@ -1,3 +1,7 @@
+/* Framebuffer sizes */
+#define WIDTH 80
+#define HEIGHT 25
+
 /* The C function */
 int sum_of_three(int arg1, int arg2, int arg3)
 {
@@ -26,4 +30,18 @@ void write_test()
     #define FB_DARK_GREY 8
 
     fb_write_cell(0, 'A', FB_GREEN, FB_DARK_GREY);   
+}
+
+/* kernel entry */
+void kmain()
+{
+    int i;
+
+    #define FB_GREEN     2
+    #define FB_DARK_GREY 8
+
+    for (i = 0; i < (2*WIDTH*HEIGHT); i+=2)
+    {
+        fb_write_cell(i, '\0' + i, FB_GREEN, FB_DARK_GREY);
+    }
 }
