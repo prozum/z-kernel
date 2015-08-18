@@ -26,3 +26,4 @@ void fb_write_cell (unsigned int i, char c, fb_color_t fg, fb_color_t bg);
 
 void write_test();
 
+void fb_move_cursor(unsigned short pos);

@@ -1,4 +1,5 @@
 #include "fb.h"
+#include "io.h"
 
 /* The C function */
 int sum_of_three(int arg1, int arg2, int arg3)
@@ -10,4 +11,5 @@ int sum_of_three(int arg1, int arg2, int arg3)
 void kmain()
 {
     write_test();
+    fb_move_cursor(800);
 }
