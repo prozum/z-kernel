@@ -11,10 +11,22 @@ align 4                         ; the code must be 4 byte aligned
     dd FLAGS                    ; the flags,
     dd CHECKSUM                 ; and the checksum
 
+
+section .bootstrap_stack, nobits; start of the stack section
+align 4				; code must be 4 byte aligned
+stack_bottom:			; bottom of the stack
+resb 16384			; allocated stack size (16 KiB)
+stack_top:			; stack top
+
+section .text
 loader:                         ; the loader label (defined as entry point in linker script)
-    mov eax, 0xCAFEBABE         ; place the number 0xCAFEBABE in the register eax
-    call kmain
+    
+	mov esp, stack_top	; prepared the stack
+	extern kmain
+	call kmain		; starts the kernel
+
+	cli
 .loop:
+	hlt
     jmp .loop                   ; loop forever
 
-extern kmain
