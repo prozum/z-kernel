@@ -1,15 +1,14 @@
-OBJECTS = loader.o kmain.o fb.o io.o
-CC = gcc
-CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
-         -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
-LDFLAGS = -T link.ld -melf_i386
-AS = nasm
-ASFLAGS = -f elf
+OBJECTS = boot.o kmain.o terminal.o
+CC = i686-elf-gcc
+CFLAGS = -c -std=gnu11 -ffreestanding -O2 -Wall -Wextra
+LDFLAGS = -ffreestanding -O2 -nostdlib -lgcc
+AS = i686-elf-as
+ASFLAGS =
 
 all: kernel.elf
 
 kernel.elf: $(OBJECTS)
-	ld $(LDFLAGS) $(OBJECTS) -o kernel.elf
+	$(CC) -T linker.ld -o kernel.elf $(LDFLAGS) $(OBJECTS)
 
 os.iso: kernel.elf
 	cp kernel.elf iso/boot/kernel.elf

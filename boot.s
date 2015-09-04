@@ -1,24 +1,24 @@
-; Constants used for creating a multiboot header
-.set ALIGN,		1<<0		; Align loader modules on page boundries
-.set MEMINFO,		1<<1		; Provide memory map
-.set FLAGS,		ALIGN | MEMINFO	; Multiboot 'flag' field
-.set MAGIC,		0x1BADB002	; Some sort of sorcery
-.set CHECKSUM,		-(MAGIC + FLAGS); Checksum to prove multiboot
+# Constants used for creating a multiboot header
+.set ALIGN,		1<<0		# Align loader modules on page boundries
+.set MEMINFO,		1<<1		# Provide memory map
+.set FLAGS,		ALIGN | MEMINFO	# Multiboot 'flag' field
+.set MAGIC,		0x1BADB002	# Some sort of sorcery
+.set CHECKSUM,		-(MAGIC + FLAGS)# Checksum to prove multiboot
 
-; Multiboot header
+# Multiboot header
 .section .multiboot
 .align 4
-.long magic
+.long MAGIC
 .long FLAGS
 .long CHECKSUM
 
-; Stack
+# Stack
 .section .bootstrap, "aw", @nobits
 stack_bottom:
-.skip 16384		; 16 KiB
+.skip 16384		# 16 KiB
 stack_top:
 
-; Kernel entry point
+# Kernel entry point
 .section .text
 .global _start
 .type _start, @function
@@ -28,7 +28,7 @@ _start:
 	cli
 	hlt
 
-.Lhang
+.Lhang:
 	jmp .Lhang
 
-.size _start . - _start
+.size _start, . - _start
