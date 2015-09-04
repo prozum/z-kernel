@@ -1,4 +1,4 @@
-OBJECTS = boot.o kmain.o terminal.o io.o
+OBJECTS = boot.o kmain.o terminal.o io.o isr_wrapper.o interrupt_handler.o
 CC = i686-elf-gcc
 CFLAGS = -c -std=gnu11 -ffreestanding -O2 -Wall -Wextra
 LDFLAGS = -ffreestanding -O2 -nostdlib -lgcc
