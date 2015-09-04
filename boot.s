@@ -24,6 +24,8 @@ stack_top:
 .type _start, @function
 _start:
 	movl $stack_top, %esp
+	call kernel_entry_early
+	call _init
 	call kernel_entry_main
 	cli
 	hlt

@@ -5,10 +5,17 @@ LDFLAGS = -ffreestanding -O2 -nostdlib -lgcc
 AS = i686-elf-as
 ASFLAGS =
 
+CRTI_OBJ = crti.o
+CRTBEGIN_OBJ := $(shell $(CC) $(CFLAGS) -print-file-name=crtbegin.o)
+CRTEND_OBJ := $(shell $(CC) $(CFLAGS) -print-file-name=crtend.o)
+CRTN_OBJ = crtn.o
+
+OBJ_LINK_LIST := $(CRTI_OBJ) $(CRTBEGIN_OBJ) $(OBJECTS) $(CRTEND_OBJ) $(CRTN_OBJ)
+
 all: kernel.elf
 
-kernel.elf: $(OBJECTS)
-	$(CC) -T linker.ld -o kernel.elf $(LDFLAGS) $(OBJECTS)
+kernel.elf: $(OBJ_LINK_LIST)
+	$(CC) -T linker.ld -o kernel.elf $(LDFLAGS) $(OBJ_LINK_LIST)
 
 os.iso: kernel.elf
 	cp kernel.elf iso/boot/kernel.elf
