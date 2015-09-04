@@ -1,15 +1,10 @@
-#include "fb.h"
-#include "io.h"
+#include "terminal.h"
 
-/* The C function */
-int sum_of_three(int arg1, int arg2, int arg3)
-{
-    return arg1 + arg2 + arg3;
-}
+/* TODO: kernel early entry */
 
-/* kernel entry */
-void kmain()
+/* kernel entry main */
+void kernel_entry_main()
 {
-    write_test();
-    fb_move_cursor(800);
+	terminal_initialize();
+	terminal_writestring("Hello, kernel world!\n");
 }
