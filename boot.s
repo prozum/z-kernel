@@ -23,12 +23,14 @@ stack_top:
 section .text
 global _start
 _start:
-	mov esp, stack_top
-	extern kernel_entry_early
+	mov esp, stack_top		; Prepare stack
+
+	extern kernel_entry_early	; Early kernel entry for constructor
 	call kernel_entry_early
 	extern _init
 	call _init
-	extern kernel_entry_main
+
+	extern kernel_entry_main	; Start the kernel and enter main
 	call kernel_entry_main
 	cli
 

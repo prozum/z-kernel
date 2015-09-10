@@ -1,3 +1,5 @@
+; Used for global constructors, called before kernel code
+
 section .init
 global _init
 _init:

@@ -1,3 +1,5 @@
+; Used for global constructors, called after kernel code
+
 section .init
 	; gcc add crtend.o's .init here
 	pop ebp
