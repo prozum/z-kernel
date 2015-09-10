@@ -2,8 +2,8 @@ OBJECTS = boot.o kmain.o terminal.o io.o
 CC = i686-elf-gcc
 CFLAGS = -c -std=gnu11 -ffreestanding -O2 -Wall -Wextra
 LDFLAGS = -ffreestanding -O2 -nostdlib -lgcc
-AS = i686-elf-as
-ASFLAGS =
+AS = nasm
+ASFLAGS = -felf32
 
 CRTI_OBJ = crti.o
 CRTBEGIN_OBJ := $(shell $(CC) $(CFLAGS) -print-file-name=crtbegin.o)

@@ -1,15 +1,15 @@
-.section .init
-.global _init
-.type _init, @function
+section .init
+global _init
 _init:
-	push %ebp
-	movl %esp, %ebp
-	/* gcc add crtbegin.o's .init here */
+	push ebp
+	; mov esp, ebp
+	mov ebp, esp
+	; gcc add crtbegin.o's .init here
 
-.section .fini
-.global _fini
-.type _fini, @function
+section .fini
+global _fini
 _fini:
-	push %ebp
-	movl %esp, %ebp
-	/* gcc add crtbegin.o's .fini here */
+	push ebp
+	;mov esp, ebp
+	mov ebp, esp
+	; gcc add crtbegin.o's .fini here
