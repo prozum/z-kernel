@@ -2,6 +2,7 @@
 #define _KERNEL_VGA_H
 #endif
 
+#include <stddef.h>
 #include <stdint.h>
 
 typedef enum {
